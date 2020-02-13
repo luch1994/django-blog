@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
+  <meta name="keywords" content="{{seoKeywords}}">
+  <meta name="description" content="{{seoDescription}}">
+  <title>{{title}}</title>
+  <link rel="stylesheet" href="//cdnjs.loli.net/ajax/libs/mdui/0.4.3/css/mdui.min.css">
+  <script src="//cdnjs.loli.net/ajax/libs/mdui/0.4.3/js/mdui.min.js"></script>
+  <link rel="stylesheet" href="//juwaner-ziyuan.oss-cn-hangzhou.aliyuncs.com/css/style.css"/>
+</head>
+
+<body class="mdui-color-theme-50">
+  <!--标题-->
+  <div class="mdui-appbar mdui-appbar-fixed mdui-color-theme">
+    <div class="mdui-container">
+      <div class="mdui-row">
+        <div class="mdui-col-xs-12">
+          <div class="mdui-toolbar ">
+            <a href="/" class="mdui-typo-title mdui-typo-headline">剧丸儿资源分享</a>
+            <div class="mdui-toolbar-spacer"></div>
+            <span class="mdui-btn mdui-btn-icon mdui-ripple mdui-ripple-white"
+              mdui-dialog="{target: '#dialog-docs-theme'}" mdui-tooltip="{content: '设置主题'}">
+              <i class="mdui-icon material-icons">&#xe3b7;</i>
+            </span>
+            <!-- <form class="search-form" method="get" action="/search">
+              <input type="text" name="search" placeholder="搜索美剧名称" class="search-input" />
+              <button type="submit" class="mdui-btn mdui-btn-icon">
+                <i class="mdui-icon material-icons">&#xe8b6;</i>
+              </button>
+            </form> -->
+          </div>
+          <div class="mdui-tab category-tab">
+            {% if c == 0 %}
+            <a href="/" class="mdui-ripple mdui-color-theme-400">首页</a>
+            {% else %}
+            <a href="/" class="mdui-ripple">首页</a>
+            {% endif %}
+            {% for category in categories %}
+            {% if c == category.id %}
+            <a href="/a/?c={{category.id}}" class="mdui-ripple mdui-color-theme-400">{{category.name}}</a>
+            {% else %}
+            <a href="/a/?c={{category.id}}" class="mdui-ripple">{{category.name}}</a>
+            {% endif %}
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--主体-->
+  <div class="mdui-container main-container">
+    <div class="mdui-row">
+      {% block body %}
+      {% endblock body %}
+    </div>
+  </div>
+  <!--底部信息栏-->
+  <div class="footer mdui-color-theme">
+    <div class="mdui-container">
+      <div class="mdui-row">
+        <div class="mdui-col-xs-12">
+          <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1278611406'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s9.cnzz.com/z_stat.php%3Fid%3D1278611406%26online%3D1%26show%3Dline' type='text/javascript'%3E%3C/script%3E"));</script>
+          <span>本站所有内容均转载于网络，请网友自行辨别.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--选择主题弹窗-->
+  <div class="mdui-dialog" id="dialog-docs-theme">
+    <div class="mdui-dialog-title">设置主题</div>
+    <div class="mdui-dialog-content">
+      <form class="mdui-row-xs-1 mdui-row-sm-2 mdui-row-md-3">
+        <div class="mdui-col mdui-text-color-amber">
+          <label class="mdui-radio mdui-m-b-1">
+            <input type="radio" name="doc-theme-primary" value="amber" checked>
+            <i class="mdui-radio-icon"></i>
+            黄褐色（默认）
+          </label>
+        </div>
+        <div class="mdui-col mdui-text-color-blue">
+          <label class="mdui-radio mdui-m-b-1">
+            <input type="radio" name="doc-theme-primary" value="blue">
+            <i class="mdui-radio-icon"></i>
+            蓝色
+          </label>
+        </div>
+        <div class="mdui-col mdui-text-color-deep-purple">
+          <label class="mdui-radio mdui-m-b-1">
+            <input type="radio" name="doc-theme-primary" value="deep-purple">
+            <i class="mdui-radio-icon"></i>
+            深紫色
+          </label>
+        </div>
+        <div class="mdui-col mdui-text-color-indigo">
+          <label class="mdui-radio mdui-m-b-1">
+            <input type="radio" name="doc-theme-primary" value="indigo">
+            <i class="mdui-radio-icon"></i>
+            靛蓝色
+          </label>
+        </div>
+        <div class="mdui-col mdui-text-color-pink">
+          <label class="mdui-radio mdui-m-b-1">
+            <input type="radio" name="doc-theme-primary" value="pink">
+            <i class="mdui-radio-icon"></i>
+            粉色
+          </label>
+        </div>
+        <div class="mdui-col mdui-text-color-teal">
+          <label class="mdui-radio mdui-m-b-1">
+            <input type="radio" name="doc-theme-primary" value="teal">
+            <i class="mdui-radio-icon"></i>
+            青色
+          </label>
+        </div>
+        <div class="mdui-col mdui-text-color-yellow">
+          <label class="mdui-radio mdui-m-b-1">
+            <input type="radio" name="doc-theme-primary" value="yellow">
+            <i class="mdui-radio-icon"></i>
+            黄色
+          </label>
+        </div>
+      </form>
+    </div>
+  </div>
+  <button class="mdui-fab mdui-fab-fixed mdui-fab-mini mdui-ripple" type="button" onclick="toTop()"><i
+      class="mdui-icon material-icons">&#xe25a;</i></button>
+  <script>
+    function toTop() {
+      window.scrollTo(0, 0)
+    }
+    window.onload = function() {
+      var theme = localStorage.getItem('theme')
+      if (!theme) {
+        theme = 'amber';
+      }
+      document.documentElement.className = 'mdui-theme-accent-blue mdui-theme-primary-' + theme;
+      document.querySelector('[name="doc-theme-primary"][value="' + theme + '"]').checked = true;
+      var radios = document.getElementsByName('doc-theme-primary');
+      for(let r of radios) {
+        r.addEventListener('change', function(e) {
+        localStorage.setItem('theme', this.value);
+        document.documentElement.className = 'mdui-theme-accent-blue mdui-theme-primary-' + this.value;
+      });
+      }
+    };
+  </script>
+</body>
+
+</html>

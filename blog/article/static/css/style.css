@@ -1,0 +1,262 @@
+html,
+body {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+input {
+  outline: none;
+}
+
+a {
+  text-decoration: none;
+  color: #333;
+}
+
+.main-container {
+  padding-top: 112px;
+  padding-bottom: 20px;
+}
+
+.main-item {
+  display: inline-block;
+  width: 100%;
+  margin: 15px 0 5px 0;
+  margin-top: 10px;
+  box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.1);
+  background-color: #FFFFFF;
+}
+
+.main-item .img-box {
+  width: 100%;
+  height: 150px;
+  overflow: hidden;
+}
+
+.main-item .img-box img {
+  width: 100%;
+  height: auto;
+}
+
+.main-item .info {
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+.main-item .info .title {
+  font-size: 14px;
+  padding: 10px 0;
+}
+
+.main-item .info .content {
+  font-size: 12px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  margin-bottom: 10px;
+}
+
+.other-info {
+  width: 100%;
+  display: flex;
+  padding: 5px 18px;
+  line-height: 24px;
+}
+
+.other-info i {
+  font-size: 16px;
+}
+
+.other-info>span {
+  margin-right: 10px;
+}
+
+.side-box {
+  width: 100%;
+  margin: 25px 0;
+  background: #FFF;
+  font-size: 14px;
+  box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.1);
+}
+
+.side-box h2 {
+  padding: 3px 15px;
+  line-height: 35px;
+  font-size: 16px;
+  margin: 0;
+  border-bottom: 1px solid #ddd;
+}
+
+.side-box .side-item {
+  width: 100%;
+  height: 88px;
+  display: flex;
+  flex-direction: row;
+  padding: 15px 10px;
+  border-bottom: 1px solid #eee;
+}
+
+.side-box .side-item .img-box {
+  flex-basis: 33.33%;
+  flex-grow: 0;
+  flex-shrink: 0;
+  height: 100%;
+  overflow: hidden;
+  margin-right: 10px;
+}
+
+.side-box .side-item .img-box img {
+  width: 100%;
+}
+
+.side-box .side-item .info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex: 1;
+  font-size: 12px;
+}
+
+.side-box .side-item .info .title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.side-box .side-item .info .other-info {
+  padding: 0;
+}
+
+.post-box {
+  width: 100%;
+  margin-top: 25px;
+  padding: 20px;
+  background-color: #FFF;
+  line-height: 1.6em;
+}
+
+.post-box > h1 {
+  line-height: 1.5em;
+}
+
+.post p img {
+  display: block;
+  max-width: 100%;
+  height: auto !important;
+  margin: 15px auto auto auto;
+}
+
+.post a {
+  color: #448aff;
+}
+
+/* 分页 */
+.page-box {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin: 16px 0;
+  font-size: 10px;
+}
+
+.page-item {
+  box-sizing: border-box;
+  height: 1.6em;
+  font-size: 0.8em;
+  border-radius: 0.8em;
+  padding: 0 1em;
+  border: 1px solid currentColor;
+  line-height: 1.5em;
+  text-decoration: none;
+  margin: 0 0.3em;
+}
+
+.recommend-box {
+  background-color: #FFF;
+  padding: 10px;
+  margin-top: 20px;
+}
+
+.recommend-box .mdui-col {
+  overflow: hidden;
+}
+
+.recommend-box .mdui-col a {
+  display: block;
+  margin: 10px;
+}
+
+.recommend-box .mdui-col a .img-box {
+  display: block;
+  width: 100%;
+  height: 0;
+  position: relative;
+  overflow: hidden;
+  padding: 50% 0 0 0;
+  border: none;
+}
+
+.recommend-box .mdui-col a .img-box img {
+  width: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.recommend-box .mdui-col a .tip {
+  display: inline-block;
+  width: 100%;
+  font-size: 13px;
+  line-height: 20px;
+  margin-top: 10px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.footer {
+  width: 100%;
+  padding: 20px 0;
+}
+
+@media (min-width: 600px) {
+  .page-box {
+    font-size: 14px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .main-item {
+    margin: 25px 0 0 0;
+  }
+
+  .main-item .img-box {
+    height: 230px;
+  }
+
+  .main-item .info .title {
+    font-size: 20px;
+  }
+
+  .main-item .info .content {
+    font-size: 14px;
+  }
+
+  .main-item .other-info {
+    line-height: 40px;
+  }
+
+  .page-box {
+    font-size: 17px;
+  }
+}

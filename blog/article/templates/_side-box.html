@@ -1,0 +1,23 @@
+<div class="side-box">
+  <h2>{{title}}</h2>
+  {% for article in articles %}
+  <a href="{% url 'article:detail' article.id %}" class="side-item" target="_blank" title="{{article.title}}">
+    <div class="img-box">
+      <img src="{{article.head_img}}" />
+    </div>
+    <div class="info">
+      <div class="title">{{article.title}}</div>
+      <div class="other-info">
+        <span>
+          <i class="mdui-icon material-icons">&#xe192;</i>
+          {{article.created_at|date:"Y-m-d"}}
+        </span>
+        <span>
+          <i class="mdui-icon material-icons">&#xe060;</i>
+          {{article.category}}
+        </span>
+      </div>
+    </div>
+  </a>
+  {% endfor %}
+</div>

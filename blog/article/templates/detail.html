@@ -1,0 +1,44 @@
+{% extends "./_base.html" %}
+{% block body %}
+<div class="mdui-col-md-3 mdui-hidden-sm mdui-hidden-xs">
+  {% include '_side-box.html' with articles=recommend_list title='推荐'%}
+</div>
+<div class="mdui-col-md-6 mdui-col-sm-8 mdui-col-xs-12">
+  <div class="post-box">
+    <h1>{{article.title}}</h1>
+    <div class="other-info" style="padding: 5px;border-bottom: 1px solid #ddd;color: #999;">
+      <span>
+        <i class="mdui-icon material-icons">&#xe192;</i>
+        {{article.created_at|date:"Y-m-d"}}
+      </span>
+      <span>
+        <i class="mdui-icon material-icons">&#xe060;</i>
+        {{article.category}}
+      </span>
+    </div>
+    {% autoescape off %}
+    <div class="post">
+      {{article.body}}
+    </div>
+    {% endautoescape %}
+  </div>
+  <div class="mdui-row-xs-4 mdui-grid-list recommend-box">
+    {% for article in recommend_list %}
+    {% if forloop.counter < 5 %}
+    <div class="mdui-col">
+      <a href="{% url 'article:detail' article.id %}" target="_blank" title="{{article.title}}">
+        <span class="img-box">
+          <img src="{{article.head_img}}"/>
+        </span>
+        <span class="tip">{{article.title}}</span>
+      </a>
+    </div>
+    {% endif %}
+    {% endfor %}
+  </div>
+</div>
+<div class="mdui-col-md-3 mdui-col-sm-4 mdui-col-xs-12">
+  {% include '_side-box.html' with articles=hot_list title='热门'%}
+  {% include '_side-box.html' with articles=new_list title='最新'%}
+</div>
+{% endblock body %}
