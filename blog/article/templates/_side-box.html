@@ -1,4 +1,4 @@
-<div class="side-box">
+<div class="side-box {{cuscls}}">
   <h2>{{title}}</h2>
   {% for article in articles %}
   <a href="{% url 'article:detail' article.id %}" class="side-item" target="_blank" title="{{article.title}}">
@@ -10,7 +10,7 @@
       <div class="other-info">
         <span>
           <i class="mdui-icon material-icons">&#xe192;</i>
-          {{article.created_at|date:"Y-m-d"}}
+          {{article.updated_at|date:"Y-m-d"}}
         </span>
         <span>
           <i class="mdui-icon material-icons">&#xe060;</i>

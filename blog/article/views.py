@@ -4,6 +4,8 @@ from django.core.paginator import Paginator, EmptyPage
 
 from .models import Articles, Categories
 
+import random
+
 # Create your views here.
 
 # 列表页通用
@@ -12,10 +14,13 @@ def index(request):
     p = int(request.GET.get('p', '1'))
     psize = int(request.GET.get('psize', '12'))
     c = int(request.GET.get('c', '0'))
+    q = request.GET.get('q', '')
     # 获取所有文章
     articles = Articles.objects.all().filter(is_show = True).order_by('-updated_at')
     if c != 0:
         articles = articles.filter(category = c)
+    if q:
+        articles = articles.filter(title__icontains=q)
     paginator = Paginator(articles, psize)
     # 计算分页范围
     if paginator.num_pages > 1:
@@ -37,11 +42,15 @@ def index(request):
     categories = Categories.objects.all()
     # 其他推送
     new_list, hot_list, recommend_list = get_side_list()
+    new_list = new_list[:5]
+    hot_list = hot_list[:8]
+    recommend_list = recommend_list[:5]
     # 标题，前端seo关键字和描述
     title = '剧丸儿资源分享 最专业的资源收集分享平台'
     seoKeyword = '剧丸儿 资源 分享'
     seoDescription = '剧丸儿资源分享网-专注于资源分享'
     return render(request, 'index.html', locals())
+
 
 # 详情页通用
 def detail(request, article_id):
@@ -53,6 +62,11 @@ def detail(request, article_id):
     categories = Categories.objects.all()
     # 其他推送
     new_list, hot_list, recommend_list = get_side_list()
+    new_list = new_list[:5]
+    hot_list = hot_list[:8]
+    # bottom_recommend = random.sample(recommend_list, 4)
+    bottom_recommend = recommend_list.order_by('?')[:4]
+    recommend_list = recommend_list[:5]
     # 标题，前端seo关键字和描述
     title = article.title
     seoKeyword = title
@@ -68,5 +82,5 @@ def get_side_list():
     hot_list = new_list.order_by('-view_times')
     # 推荐
     recommend_list = new_list.filter(is_recommend=True)
-    return new_list[:5],hot_list[:5],recommend_list[:8]
+    return new_list,hot_list,recommend_list
 

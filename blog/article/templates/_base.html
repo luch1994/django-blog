@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-  
+
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
   <meta name="keywords" content="{{seoKeywords}}">
@@ -26,12 +26,6 @@
               mdui-dialog="{target: '#dialog-docs-theme'}" mdui-tooltip="{content: '设置主题'}">
               <i class="mdui-icon material-icons">&#xe3b7;</i>
             </span>
-            <!-- <form class="search-form" method="get" action="/search">
-              <input type="text" name="search" placeholder="搜索美剧名称" class="search-input" />
-              <button type="submit" class="mdui-btn mdui-btn-icon">
-                <i class="mdui-icon material-icons">&#xe8b6;</i>
-              </button>
-            </form> -->
           </div>
           <div class="mdui-tab category-tab">
             {% if c == 0 %}
@@ -54,8 +48,25 @@
   <!--主体-->
   <div class="mdui-container main-container">
     <div class="mdui-row">
+      <div class="mdui-col-md-3 mdui-hidden-sm">
+        <div class="side-box">
+          <h2>搜索</h2>
+          <form class="search-form" method="GET" action="/search/">
+            {% csrf_token %}
+            <input type="text" name="q" class="search-input" />
+            <button class="search-btn mdui-btn mdui-color-theme" type="submit">
+              <i class="mdui-icon material-icons">&#xe8b6;</i>
+            </button>
+          </form>
+        </div>
+        {% include '_side-box.html' with articles=hot_list title='热门' cuscls='mdui-hidden-xs' %}
+      </div>
       {% block body %}
       {% endblock body %}
+      <div class="mdui-col-md-3 mdui-col-sm-4 mdui-col-xs-12">
+        {% include '_side-box.html' with articles=recommend_list title='推荐'%}
+        {% include '_side-box.html' with articles=new_list title='最新'%}
+      </div>
     </div>
   </div>
   <!--底部信息栏-->
@@ -63,7 +74,8 @@
     <div class="mdui-container">
       <div class="mdui-row">
         <div class="mdui-col-xs-12">
-          <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1278611406'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s9.cnzz.com/z_stat.php%3Fid%3D1278611406%26online%3D1%26show%3Dline' type='text/javascript'%3E%3C/script%3E"));</script>
+          <script
+            type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://"); document.write(unescape("%3Cspan id='cnzz_stat_icon_1278611406'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s9.cnzz.com/z_stat.php%3Fid%3D1278611406%26online%3D1%26show%3Dline' type='text/javascript'%3E%3C/script%3E"));</script>
           <span>本站所有内容均转载于网络，请网友自行辨别.</span>
         </div>
       </div>
@@ -132,7 +144,7 @@
     function toTop() {
       window.scrollTo(0, 0)
     }
-    window.onload = function() {
+    window.onload = function () {
       var theme = localStorage.getItem('theme')
       if (!theme) {
         theme = 'amber';
@@ -140,11 +152,11 @@
       document.documentElement.className = 'mdui-theme-accent-blue mdui-theme-primary-' + theme;
       document.querySelector('[name="doc-theme-primary"][value="' + theme + '"]').checked = true;
       var radios = document.getElementsByName('doc-theme-primary');
-      for(let r of radios) {
-        r.addEventListener('change', function(e) {
-        localStorage.setItem('theme', this.value);
-        document.documentElement.className = 'mdui-theme-accent-blue mdui-theme-primary-' + this.value;
-      });
+      for (let r of radios) {
+        r.addEventListener('change', function (e) {
+          localStorage.setItem('theme', this.value);
+          document.documentElement.className = 'mdui-theme-accent-blue mdui-theme-primary-' + this.value;
+        });
       }
     };
   </script>

@@ -224,6 +224,23 @@ a {
   text-overflow: ellipsis;
 }
 
+.search-form {
+  width: 100%;
+  padding: 20px;
+  display: flex;
+  flex-direction: row;
+}
+
+.search-form .search-input {
+  flex: 1;
+}
+
+.search-form .search-btn {
+  flex-basis: 40px;
+  min-width: 40px;
+  padding: 0;
+}
+
 .footer {
   width: 100%;
   padding: 20px 0;
