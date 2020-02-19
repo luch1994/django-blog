@@ -2,6 +2,10 @@ from django.contrib import admin
 from .models import *
 # Register your models here.
 
+class CommentsInline(admin.TabularInline):
+    model = Comments
+    extra = 1
+
 # 自定义文章管理列表
 class ArticlesAdmin(admin.ModelAdmin):
     # 自定义列表显示，默认只显示一列，存在多对多关系的列不能指定显示和编辑
@@ -16,6 +20,8 @@ class ArticlesAdmin(admin.ModelAdmin):
     search_fields = ('title', 'category__name')
     # 过滤选项
     list_filter = ('is_recommend', 'is_show')
+    # 文章的评论
+    inlines = [CommentsInline]
     #添加时非必要信息折叠不显示
     # fieldsets = [(None, {'fields': ['sname','cls']}),('other information', {'fields': ['gender', 'age'], 'classes': ['collapse']})]  
     # 仅限多对多列使用，对存在多对多的列可搜索
@@ -27,3 +33,4 @@ class ArticlesAdmin(admin.ModelAdmin):
 admin.site.register(Categories)
 admin.site.register(Articles, ArticlesAdmin)
 admin.site.register(Tags)
+# admin.site.register(Comments)

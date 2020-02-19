@@ -23,17 +23,53 @@
     </div>
     {% endautoescape %}
   </div>
-  <div class="mdui-row-xs-4 mdui-grid-list recommend-box">
+  <div class="mdui-row-xs-4 mdui-grid-list white-box">
     {% for article in bottom_recommend %}
     <div class="mdui-col">
       <a href="{% url 'article:detail' article.id %}" target="_blank" title="{{article.title}}">
         <span class="img-box">
-          <img src="{{article.head_img}}"/>
+          <img src="{{article.head_img}}" />
         </span>
         <span class="tip">{{article.title}}</span>
       </a>
     </div>
     {% endfor %}
+  </div>
+  <div class="white-box">
+    <form class="my-form" method="POST" onsubmit="return comment_submit(this)">
+      <input type="hidden" name="article" value="{{article.id}}">
+      {% csrf_token %}
+      <div class="input-block">
+        <label>昵称</label>
+        <input class="input" name="name" value="游客" />
+      </div>
+      <div class="input-block">
+        <label>邮箱</label>
+        <input class="input" name="email" />
+      </div>
+      <div class="input-block">
+        <label>评论</label>
+        <textarea name="content" cols="30" rows="5" class="input"></textarea>
+      </div>
+      <div class="input-block">
+        <label></label>
+        <button class="mdui-btn mdui-color-theme-accent mdui-ripple" type="submit">提交</button>
+      </div>
+    </form>
+    <div id="commentList">
+      {% for comment in comments %}
+      <div class="comment-block">
+        <div class="head-img">
+          <img src="https://tvax4.sinaimg.cn/large/83cf6044gy1gc1r2n2p48j20nc0ncmyj.jpg" alt="image">
+        </div>
+        <div class="comment-info">
+          <div class="content">{{comment.content|linebreaks}}</div>
+          <div><span class="name mdui-text-color-theme-accent">{{comment.name}}</span> <span
+              class="date">{{comment.created_at|date:"Y-m-d"}}</span></div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
   </div>
 </div>
 {% endblock body %}

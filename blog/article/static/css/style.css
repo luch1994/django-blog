@@ -181,22 +181,22 @@ a {
   margin: 0 0.3em;
 }
 
-.recommend-box {
+.white-box {
   background-color: #FFF;
   padding: 10px;
   margin-top: 20px;
 }
 
-.recommend-box .mdui-col {
+.white-box .mdui-col {
   overflow: hidden;
 }
 
-.recommend-box .mdui-col a {
+.white-box .mdui-col a {
   display: block;
   margin: 10px;
 }
 
-.recommend-box .mdui-col a .img-box {
+.white-box .mdui-col a .img-box {
   display: block;
   width: 100%;
   height: 0;
@@ -206,14 +206,14 @@ a {
   border: none;
 }
 
-.recommend-box .mdui-col a .img-box img {
+.white-box .mdui-col a .img-box img {
   width: 100%;
   position: absolute;
   left: 0;
   top: 0;
 }
 
-.recommend-box .mdui-col a .tip {
+.white-box .mdui-col a .tip {
   display: inline-block;
   width: 100%;
   font-size: 13px;
@@ -222,6 +222,71 @@ a {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.my-form .input-block {
+  display: flex;
+  flex-direction: row;
+  padding: 8px 0;
+  line-height: 35px;
+}
+
+.my-form .input-block label {
+  flex-basis: 80px;
+  flex-grow: 0;
+  flex-shrink: 0;
+  margin-right: 10px;
+  text-align: right;
+}
+
+.my-form .input-block .input {
+  flex: 1;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 8px;
+}
+
+.comment-block {
+  display: flex;
+  flex-direction: row;
+  margin-top: 15px;
+}
+
+.comment-block .head-img {
+  flex-basis: 48px;
+  flex-grow: 0;
+  flex-shrink: 0;
+}
+
+.comment-block .head-img img {
+  width: 100%;
+  margin-top: 10px;
+}
+
+.comment-block .comment-info {
+  flex: 1;
+  padding: 10px;
+}
+
+.comment-block .comment-info .content {
+  color: #888;
+  margin-bottom: 10px;
+  line-height: 20px;
+  font-size: 14px;
+}
+
+.comment-block .comment-info .name {
+  font-size: 12px;
+}
+
+.comment-block .comment-info .date {
+  color: #bbb;
+  margin-left: 10px;
+  font-size: 12px;
+}
+
+#commentList {
+  padding: 8px 10px;
 }
 
 .search-form {

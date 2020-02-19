@@ -10,6 +10,7 @@
   <title>{{title}}</title>
   <link rel="stylesheet" href="//cdnjs.loli.net/ajax/libs/mdui/0.4.3/css/mdui.min.css">
   <script src="//cdnjs.loli.net/ajax/libs/mdui/0.4.3/js/mdui.min.js"></script>
+  <script src="https://cdn.bootcss.com/axios/0.19.0/axios.min.js"></script>
   <link rel="stylesheet" href="//juwaner-ziyuan.oss-cn-hangzhou.aliyuncs.com/css/style.css"/>
 </head>
 
@@ -143,6 +144,52 @@
   <script>
     function toTop() {
       window.scrollTo(0, 0)
+    }
+    function comment_submit(e) {
+      console.dir(e);
+      const name = e.name.value;
+      if (!name) {
+        mdui.alert('请输入昵称');
+        return false;
+      }
+      const article = e.article.value;
+      const email = e.email.value;
+      const content = e.content.value;
+      if (!content) {
+        mdui.alert('请输入评论');
+        return false;
+      }
+      const data = new URLSearchParams();
+      data.append('name', name);
+      data.append('article', article);
+      data.append('email', email);
+      data.append('content', content);
+      data.append('csrfmiddlewaretoken', e.csrfmiddlewaretoken.value);
+      axios({
+        url: '/a/add_comment/',
+        method: 'post',
+        data: data,
+      }).then(res => {
+        if (res.data.code == 0) {
+          let now = new Date();
+          let y = now.getFullYear(), m = now.getMonth() + 1, d = now.getDate();
+          nowstr = `${y < 10 ? '0' + y : y }-${m < 10 ? '0' + m : m}-${d >= 10 ? d : '0' + d}`;
+          mdui.alert('评论成功');
+          let commentList = document.getElementById('commentList');
+          commentList.innerHTML = `<div class="comment-block">
+      <div class="head-img">
+        <img src="https://tvax4.sinaimg.cn/large/83cf6044gy1gc1r2n2p48j20nc0ncmyj.jpg" alt="image" >
+      </div>
+      <div class="comment-info">
+        <div class="content">${content}</div>
+        <div><span class="name mdui-text-color-theme-accent">${name}</span>    <span class="date">${nowstr}</span></div>
+      </div>
+    </div>` + commentList.innerHTML;
+        } else {
+          mdui.alert('评论失败，请重新提交');
+        }
+      })
+      return false;
     }
     window.onload = function () {
       var theme = localStorage.getItem('theme')

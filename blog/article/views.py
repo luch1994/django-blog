@@ -1,8 +1,9 @@
 from django.shortcuts import render, get_object_or_404
 from django.views import generic
 from django.core.paginator import Paginator, EmptyPage
+from django.http import JsonResponse
 
-from .models import Articles, Categories
+from .models import Articles, Categories, Comments
 
 import random
 
@@ -51,7 +52,6 @@ def index(request):
     seoDescription = '剧丸儿资源分享网-专注于资源分享'
     return render(request, 'index.html', locals())
 
-
 # 详情页通用
 def detail(request, article_id):
     # 获取当前文章详情
@@ -71,7 +71,23 @@ def detail(request, article_id):
     title = article.title
     seoKeyword = title
     seoDescription = article.desc
+    # 评论列表
+    comments = Comments.objects.filter(article = article_id).order_by('-id')
     return render(request, 'detail.html', locals())
+
+def add_comment(request):
+    try:
+        postdata = request.POST
+        name = postdata.get('name')
+        article_id = int(postdata.get('article'))
+        email = postdata.get('email')
+        content = postdata.get('content')
+        article = Articles.objects.get(pk = article_id)
+        comment = Comments(name = name, article = article, email = email, content = content)
+        comment.save()
+    except BaseException:
+        return JsonResponse({ 'code': -1 })
+    return JsonResponse({ 'code': 0 })
 
 # 获取推荐，热门，最新
 def get_side_list():
