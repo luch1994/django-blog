@@ -46,3 +46,15 @@ class Articles(models.Model):
         self.view_times += 1
         self.save(update_fields=['view_times'])
 
+
+# 评论
+class Comments(models.Model):
+    name = models.CharField('昵称', max_length=50, default='', null=True)
+    content = models.TextField('内容')
+    created_at = models.DateTimeField('评论时间', auto_now_add=True)
+    email = models.CharField('邮箱地址', max_length=100, null=True, default='', blank=True)
+    is_show = models.BooleanField('是否显示出来', default=True)
+    article = models.ForeignKey(Articles, verbose_name="评论的文章", null=True, on_delete=models.SET_NULL)
+
+    def __str__(self):
+        return self.content[:5] + '...'

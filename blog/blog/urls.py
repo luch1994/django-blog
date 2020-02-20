@@ -22,5 +22,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('a/', include('article.urls')),
     path('', index, name='index'),
+    path('search/', index, name='search')
     # path('favicon.ico', serve, { 'path': 'img/favicon.ico' })
 ]

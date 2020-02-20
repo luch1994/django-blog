@@ -1,8 +1,5 @@
 {% extends "./_base.html" %}
 {% block body %}
-<div class="mdui-col-md-3 mdui-hidden-sm mdui-hidden-xs">
-  {% include '_side-box.html' with articles=recommend_list title='推荐'%}
-</div>
 <div class="mdui-col-md-6 mdui-col-sm-8 mdui-col-xs-12">
   {% for article in current_page %}
   <a href="{% url 'article:detail' article.id %}" class="main-item" target="_blank" title="{{article.title}}">
@@ -16,7 +13,7 @@
     <div class="other-info">
       <span>
         <i class="mdui-icon material-icons">&#xe192;</i>
-        {{article.created_at|date:"Y-m-d"}}
+        {{article.updated_at|date:"Y-m-d"}}
       </span>
       <span>
         <i class="mdui-icon material-icons">&#xe060;</i>
@@ -42,9 +39,5 @@
     <a class="page-item mdui-text-color-theme-accent" href="?p={{paginator.num_pages}}">>></a>
     {% endif %}
   </div>
-</div>
-<div class="mdui-col-md-3 mdui-col-sm-4 mdui-col-xs-12">
-  {% include '_side-box.html' with articles=hot_list title='热门'%}
-  {% include '_side-box.html' with articles=new_list title='最新'%}
 </div>
 {% endblock body %}

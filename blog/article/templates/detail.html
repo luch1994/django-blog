@@ -1,19 +1,20 @@
 {% extends "./_base.html" %}
 {% block body %}
-<div class="mdui-col-md-3 mdui-hidden-sm mdui-hidden-xs">
-  {% include '_side-box.html' with articles=recommend_list title='推荐'%}
-</div>
 <div class="mdui-col-md-6 mdui-col-sm-8 mdui-col-xs-12">
   <div class="post-box">
     <h1>{{article.title}}</h1>
     <div class="other-info" style="padding: 5px;border-bottom: 1px solid #ddd;color: #999;">
       <span>
         <i class="mdui-icon material-icons">&#xe192;</i>
-        {{article.created_at|date:"Y-m-d"}}
+        {{article.updated_at|date:"Y-m-d"}}
       </span>
       <span>
         <i class="mdui-icon material-icons">&#xe060;</i>
         {{article.category}}
+      </span>
+      <span>
+        <i class="mdui-icon material-icons">&#xe417;</i>
+        {{article.view_times}}
       </span>
     </div>
     {% autoescape off %}
@@ -22,23 +23,53 @@
     </div>
     {% endautoescape %}
   </div>
-  <div class="mdui-row-xs-4 mdui-grid-list recommend-box">
-    {% for article in recommend_list %}
-    {% if forloop.counter < 5 %}
+  <div class="mdui-row-xs-4 mdui-grid-list white-box">
+    {% for article in bottom_recommend %}
     <div class="mdui-col">
       <a href="{% url 'article:detail' article.id %}" target="_blank" title="{{article.title}}">
         <span class="img-box">
-          <img src="{{article.head_img}}"/>
+          <img src="{{article.head_img}}" />
         </span>
         <span class="tip">{{article.title}}</span>
       </a>
     </div>
-    {% endif %}
     {% endfor %}
   </div>
-</div>
-<div class="mdui-col-md-3 mdui-col-sm-4 mdui-col-xs-12">
-  {% include '_side-box.html' with articles=hot_list title='热门'%}
-  {% include '_side-box.html' with articles=new_list title='最新'%}
+  <div class="white-box">
+    <form class="my-form" method="POST" onsubmit="return comment_submit(this)">
+      <input type="hidden" name="article" value="{{article.id}}">
+      {% csrf_token %}
+      <div class="input-block">
+        <label>昵称</label>
+        <input class="input" name="name" value="游客" />
+      </div>
+      <div class="input-block">
+        <label>邮箱</label>
+        <input class="input" name="email" />
+      </div>
+      <div class="input-block">
+        <label>评论</label>
+        <textarea name="content" cols="30" rows="5" class="input"></textarea>
+      </div>
+      <div class="input-block">
+        <label></label>
+        <button class="mdui-btn mdui-color-theme-accent mdui-ripple" type="submit">提交</button>
+      </div>
+    </form>
+    <div id="commentList">
+      {% for comment in comments %}
+      <div class="comment-block">
+        <div class="head-img">
+          <img src="https://tvax4.sinaimg.cn/large/83cf6044gy1gc1r2n2p48j20nc0ncmyj.jpg" alt="image">
+        </div>
+        <div class="comment-info">
+          <div class="content">{{comment.content|linebreaks}}</div>
+          <div><span class="name mdui-text-color-theme-accent">{{comment.name}}</span> <span
+              class="date">{{comment.created_at|date:"Y-m-d"}}</span></div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
 </div>
 {% endblock body %}
